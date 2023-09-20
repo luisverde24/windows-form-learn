@@ -29,15 +29,17 @@
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            button1 = new Button();
+            Titulo = new DataGridViewTextBoxColumn();
+            Note = new DataGridViewTextBoxColumn();
+            Estatus = new DataGridViewTextBoxColumn();
+            Guardar = new Button();
             richTextBox1 = new RichTextBox();
             label1 = new Label();
-            lbltext = new Label();
             saveDataTextBox = new TextBox();
             label2 = new Label();
             groupBox1 = new GroupBox();
-            radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -46,22 +48,41 @@
             // 
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Titulo, Note, Estatus });
             dataGridView1.Location = new Point(12, 289);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 58;
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(390, 199);
             dataGridView1.TabIndex = 0;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            dataGridView1.RowHeaderMouseDoubleClick += dataGridView1_RowHeaderMouseDoubleClick;
             // 
-            // button1
+            // Titulo
             // 
-            button1.Location = new Point(325, 245);
-            button1.Name = "button1";
-            button1.Size = new Size(77, 23);
-            button1.TabIndex = 1;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            Titulo.HeaderText = "Titulo";
+            Titulo.Name = "Titulo";
+            // 
+            // Note
+            // 
+            Note.HeaderText = "Nota";
+            Note.Name = "Note";
+            Note.Width = 130;
+            // 
+            // Estatus
+            // 
+            Estatus.HeaderText = "Estatus";
+            Estatus.Name = "Estatus";
+            // 
+            // Guardar
+            // 
+            Guardar.Location = new Point(325, 245);
+            Guardar.Name = "Guardar";
+            Guardar.Size = new Size(77, 23);
+            Guardar.TabIndex = 1;
+            Guardar.Text = "button1";
+            Guardar.UseVisualStyleBackColor = true;
+            Guardar.Click += button1_Click;
             // 
             // richTextBox1
             // 
@@ -70,7 +91,6 @@
             richTextBox1.Size = new Size(381, 96);
             richTextBox1.TabIndex = 4;
             richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
             // 
             // label1
             // 
@@ -80,15 +100,6 @@
             label1.Size = new Size(108, 15);
             label1.TabIndex = 6;
             label1.Text = "Welcome to Jumaji";
-            // 
-            // lbltext
-            // 
-            lbltext.AutoSize = true;
-            lbltext.Location = new Point(22, 306);
-            lbltext.Name = "lbltext";
-            lbltext.Size = new Size(0, 15);
-            lbltext.TabIndex = 7;
-            lbltext.Click += lbltext_Click;
             // 
             // saveDataTextBox
             // 
@@ -119,17 +130,6 @@
             groupBox1.Text = "Estatus";
             groupBox1.Enter += groupBox1_Enter;
             // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(14, 22);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(77, 19);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Por Hacer";
-            radioButton1.UseVisualStyleBackColor = true;
-            // 
             // radioButton2
             // 
             radioButton2.AutoSize = true;
@@ -141,6 +141,17 @@
             radioButton2.Text = "Completado";
             radioButton2.UseVisualStyleBackColor = true;
             // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(14, 22);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(77, 19);
+            radioButton1.TabIndex = 0;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Por Hacer";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
             // Nota
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -149,13 +160,13 @@
             Controls.Add(groupBox1);
             Controls.Add(label2);
             Controls.Add(saveDataTextBox);
-            Controls.Add(lbltext);
             Controls.Add(label1);
             Controls.Add(richTextBox1);
-            Controls.Add(button1);
+            Controls.Add(Guardar);
             Controls.Add(dataGridView1);
             Name = "Nota";
             Text = "Nota";
+            Load += Nota_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -166,14 +177,16 @@
         #endregion
 
         private DataGridView dataGridView1;
-        private Button button1;
+        private Button Guardar;
         private RichTextBox richTextBox1;
         private Label label1;
-        private Label lbltext;
         private TextBox saveDataTextBox;
         private Label label2;
         private GroupBox groupBox1;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
+        private DataGridViewTextBoxColumn Titulo;
+        private DataGridViewTextBoxColumn Note;
+        private DataGridViewTextBoxColumn Estatus;
     }
 }
