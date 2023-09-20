@@ -49,7 +49,6 @@
             letraPToolStripMenuItem.Name = "letraPToolStripMenuItem";
             letraPToolStripMenuItem.Size = new Size(55, 20);
             letraPToolStripMenuItem.Text = "Letra P";
-            letraPToolStripMenuItem.Click += letraPToolStripMenuItem_Click;
             // 
             // calculadoraToolStripMenuItem
             // 

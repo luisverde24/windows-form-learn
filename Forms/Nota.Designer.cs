@@ -31,11 +31,13 @@
             dataGridView1 = new DataGridView();
             button1 = new Button();
             richTextBox1 = new RichTextBox();
-            groupBox1 = new GroupBox();
-            radioButton2 = new RadioButton();
-            radioButton1 = new RadioButton();
             label1 = new Label();
             lbltext = new Label();
+            saveDataTextBox = new TextBox();
+            label2 = new Label();
+            groupBox1 = new GroupBox();
+            radioButton1 = new RadioButton();
+            radioButton2 = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -44,7 +46,7 @@
             // 
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 243);
+            dataGridView1.Location = new Point(12, 289);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
             dataGridView1.Size = new Size(390, 199);
@@ -53,7 +55,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(325, 199);
+            button1.Location = new Point(325, 245);
             button1.Name = "button1";
             button1.Size = new Size(77, 23);
             button1.TabIndex = 1;
@@ -63,45 +65,12 @@
             // 
             // richTextBox1
             // 
-            richTextBox1.Location = new Point(21, 64);
+            richTextBox1.Location = new Point(21, 110);
             richTextBox1.Name = "richTextBox1";
             richTextBox1.Size = new Size(381, 96);
             richTextBox1.TabIndex = 4;
             richTextBox1.Text = "";
             richTextBox1.TextChanged += richTextBox1_TextChanged;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(radioButton2);
-            groupBox1.Controls.Add(radioButton1);
-            groupBox1.Location = new Point(12, 182);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(213, 55);
-            groupBox1.TabIndex = 5;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Estatus";
-            // 
-            // radioButton2
-            // 
-            radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(106, 17);
-            radioButton2.Name = "radioButton2";
-            radioButton2.Size = new Size(91, 19);
-            radioButton2.TabIndex = 1;
-            radioButton2.TabStop = true;
-            radioButton2.Text = "Completado";
-            radioButton2.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            radioButton1.AutoSize = true;
-            radioButton1.Location = new Point(6, 17);
-            radioButton1.Name = "radioButton1";
-            radioButton1.Size = new Size(75, 19);
-            radioButton1.TabIndex = 0;
-            radioButton1.TabStop = true;
-            radioButton1.Text = "Por hacer";
-            radioButton1.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -115,20 +84,73 @@
             // lbltext
             // 
             lbltext.AutoSize = true;
-            lbltext.Location = new Point(21, 261);
+            lbltext.Location = new Point(22, 306);
             lbltext.Name = "lbltext";
-            lbltext.Size = new Size(38, 15);
+            lbltext.Size = new Size(0, 15);
             lbltext.TabIndex = 7;
-            lbltext.Text = "label2";
+            lbltext.Click += lbltext_Click;
+            // 
+            // saveDataTextBox
+            // 
+            saveDataTextBox.Location = new Point(21, 81);
+            saveDataTextBox.Name = "saveDataTextBox";
+            saveDataTextBox.Size = new Size(381, 23);
+            saveDataTextBox.TabIndex = 8;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(21, 63);
+            label2.Name = "label2";
+            label2.Size = new Size(42, 15);
+            label2.TabIndex = 9;
+            label2.Text = "Titulo:";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(radioButton2);
+            groupBox1.Controls.Add(radioButton1);
+            groupBox1.Location = new Point(21, 212);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(261, 56);
+            groupBox1.TabIndex = 10;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Estatus";
+            groupBox1.Enter += groupBox1_Enter;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(14, 22);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(77, 19);
+            radioButton1.TabIndex = 0;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Por Hacer";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(114, 22);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(91, 19);
+            radioButton2.TabIndex = 1;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "Completado";
+            radioButton2.UseVisualStyleBackColor = true;
             // 
             // Nota
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(414, 454);
+            ClientSize = new Size(414, 503);
+            Controls.Add(groupBox1);
+            Controls.Add(label2);
+            Controls.Add(saveDataTextBox);
             Controls.Add(lbltext);
             Controls.Add(label1);
-            Controls.Add(groupBox1);
             Controls.Add(richTextBox1);
             Controls.Add(button1);
             Controls.Add(dataGridView1);
@@ -146,10 +168,12 @@
         private DataGridView dataGridView1;
         private Button button1;
         private RichTextBox richTextBox1;
-        private GroupBox groupBox1;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
         private Label label1;
         private Label lbltext;
+        private TextBox saveDataTextBox;
+        private Label label2;
+        private GroupBox groupBox1;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
     }
 }

@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="C:\Users\LuisGVerde\Desktop\calculator.cs" Link="calculator.cs" />
+    <EmbeddedResource Remove="calculator.resx" />
   </ItemGroup>
 
 </Project>

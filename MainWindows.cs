@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using test_app_1.apps;
 
 namespace test_app_1
 {
@@ -16,12 +15,6 @@ namespace test_app_1
         public MainWindows()
         {
             InitializeComponent();
-        }
-
-        private void letraPToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form1 form = new Form1();
-            form.ShowDialog();
         }
 
         private void notaToolStripMenuItem_Click(object sender, EventArgs e)
