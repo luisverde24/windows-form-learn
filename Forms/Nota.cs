@@ -4,10 +4,12 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using test_app_1.Models;
 using TODO;
 
 namespace test_app_1
@@ -15,7 +17,11 @@ namespace test_app_1
     public partial class Nota : Form
     {
 
-        private List<Todo> TodoList = new List<Todo>();
+        private List<Todo> AllTodos = new();
+
+        private bool IsEditing { get; set; } = false;
+
+        private int rowId { get; set; } = 0;
 
         public Nota()
         {
@@ -26,55 +32,65 @@ namespace test_app_1
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-
-
-            if (radioButton1.Checked == true)
+            if (IsEditing)
             {
-                StreamWriter text = new StreamWriter(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
-                text.WriteLine("Titulo:" + " " + saveDataTextBox.Text);
-                text.WriteLine(richTextBox1.Text);
-                text.WriteLine("Estatus:" + " " + "Por Hacer");
+                Todo todo = AllTodos[rowId];
 
-                text.Close();
+                todo.Titulo = saveDataTextBox.Text;
+                todo.Descripcion = richTextBox1.Text;
+                todo.Estatus = radioButton1.Checked ? "Por Hacer" : "Completado";
 
-                int n = dataGridView1.Rows.Add();
-                dataGridView1.Rows[n].Cells[0].Value = saveDataTextBox.Text;
-                dataGridView1.Rows[n].Cells[1].Value = richTextBox1.Text;
-                dataGridView1.Rows[n].Cells[2].Value = "Por Hacer";
-                // StreamReader textrender = new StreamReader(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
+                AllTodos[rowId] = todo;
 
-                //lbltext.Text = textrender.ReadToEnd();
-                //textrender.Close();
+                saveDataTextBox.Text = "";
+                richTextBox1.Text = "";
+                radioButton1.Checked = true;
 
+                IsEditing = false;
+                rowId = 0;
             }
-
-            else if (radioButton2.Checked == true)
+            else
             {
-                StreamWriter text = new StreamWriter(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
-                text.WriteLine("Titulo:" + " " + saveDataTextBox.Text);
-                text.WriteLine(richTextBox1.Text);
-                text.WriteLine("Estatus:" + " " + "Completado");
+                Todo todo = new Todo
+                {
 
-                text.Close();
+                    Titulo = saveDataTextBox.Text,
+                    Descripcion = richTextBox1.Text,
+                    Estatus = radioButton1.Checked ? "Por Hacer" : "Completado",
 
-                //StreamReader textrender = new StreamReader(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
+                };
 
-                //textrender.Close();
+                AllTodos.Add(todo);
 
-                int n = dataGridView1.Rows.Add();
-                dataGridView1.Rows[n].Cells[0].Value = saveDataTextBox.Text;
-                dataGridView1.Rows[n].Cells[1].Value = richTextBox1.Text;
-                dataGridView1.Rows[n].Cells[2].Value = "Por Completar";
+                saveDataTextBox.Text = "";
+                richTextBox1.Text = "";
+                radioButton1.Checked = true;
 
             }
 
 
+            LoadData();
+
+
+            /*StreamWriter text = new StreamWriter(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
+            text.WriteLine("Titulo:" + " " + saveDataTextBox.Text);
+            text.WriteLine(richTextBox1.Text);
+            text.WriteLine("Estatus:" + " " + "Por Hacer");
+
+            text.Close();*/
         }
 
-        private void label2_Click(object sender, EventArgs e, string value)
-        {
 
+        private void Nota_Load(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        public void LoadData()
+        {
+            ListToDatatableConvert convert = new ListToDatatableConvert();
+            DataTable dataTable = convert.ToDataTable(AllTodos);
+            dataGridView1.DataSource = dataTable;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -82,58 +98,21 @@ namespace test_app_1
 
         }
 
-        private void lbltext_Click(object sender, EventArgs e)
+        private void saveDataTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            Todo todo = AllTodos[e.RowIndex];
 
+            saveDataTextBox.Text = todo.Titulo;
+            richTextBox1.Text = todo.Descripcion;
+
+            rowId = e.RowIndex;
+            IsEditing = true;
         }
-
-        private void dataGridView1_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-
-        }
-
-        private void Nota_Load(object sender, EventArgs e)
-        {
-            List<Todo> list = new List<Todo>();
-
-            Todo todo1 = new Todo
-            {
-                Titulo = "",
-                Descripcion = "",
-                Estatus = "",
-            };
-
-            Todo todo2 = new Todo
-            {
-                Titulo = "",
-                Descripcion = "",
-                Estatus = "",
-            };
-
-            Todo todo3 = new Todo
-            {
-                Titulo = "",
-                Descripcion = "",
-                Estatus = "",
-            };
-
-            list.Add(todo1);
-            list.Add(todo2);
-            list.Add(todo3);
-
-            TodoList.AddRange(list);
-
-         //   DataTable dataTable = ToDataTable(Todo);
-        }
-
-
-       // public static DataTable 
-
-        public string Value { get; set; }
     }
+
 }

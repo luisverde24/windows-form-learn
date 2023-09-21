@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             dataGridView1 = new DataGridView();
-            Titulo = new DataGridViewTextBoxColumn();
-            Note = new DataGridViewTextBoxColumn();
-            Estatus = new DataGridViewTextBoxColumn();
             Guardar = new Button();
             richTextBox1 = new RichTextBox();
             label1 = new Label();
@@ -46,33 +43,21 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Titulo, Note, Estatus });
             dataGridView1.Location = new Point(12, 289);
+            dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 58;
             dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.ShowEditingIcon = false;
             dataGridView1.Size = new Size(390, 199);
             dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            dataGridView1.RowHeaderMouseDoubleClick += dataGridView1_RowHeaderMouseDoubleClick;
-            // 
-            // Titulo
-            // 
-            Titulo.HeaderText = "Titulo";
-            Titulo.Name = "Titulo";
-            // 
-            // Note
-            // 
-            Note.HeaderText = "Nota";
-            Note.Name = "Note";
-            Note.Width = 130;
-            // 
-            // Estatus
-            // 
-            Estatus.HeaderText = "Estatus";
-            Estatus.Name = "Estatus";
+            dataGridView1.CellDoubleClick += dataGridView1_CellDoubleClick;
             // 
             // Guardar
             // 
@@ -80,7 +65,7 @@
             Guardar.Name = "Guardar";
             Guardar.Size = new Size(77, 23);
             Guardar.TabIndex = 1;
-            Guardar.Text = "button1";
+            Guardar.Text = "Guardar";
             Guardar.UseVisualStyleBackColor = true;
             Guardar.Click += button1_Click;
             // 
@@ -107,6 +92,7 @@
             saveDataTextBox.Name = "saveDataTextBox";
             saveDataTextBox.Size = new Size(381, 23);
             saveDataTextBox.TabIndex = 8;
+            saveDataTextBox.TextChanged += saveDataTextBox_TextChanged;
             // 
             // label2
             // 
@@ -128,7 +114,6 @@
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Estatus";
-            groupBox1.Enter += groupBox1_Enter;
             // 
             // radioButton2
             // 
@@ -137,13 +122,13 @@
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(91, 19);
             radioButton2.TabIndex = 1;
-            radioButton2.TabStop = true;
             radioButton2.Text = "Completado";
             radioButton2.UseVisualStyleBackColor = true;
             // 
             // radioButton1
             // 
             radioButton1.AutoSize = true;
+            radioButton1.Checked = true;
             radioButton1.Location = new Point(14, 22);
             radioButton1.Name = "radioButton1";
             radioButton1.Size = new Size(77, 19);
@@ -185,8 +170,5 @@
         private GroupBox groupBox1;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
-        private DataGridViewTextBoxColumn Titulo;
-        private DataGridViewTextBoxColumn Note;
-        private DataGridViewTextBoxColumn Estatus;
     }
 }
