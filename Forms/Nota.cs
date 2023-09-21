@@ -127,7 +127,12 @@ namespace test_app_1
             list.Add(todo3);
 
             TodoList.AddRange(list);
+
+         //   DataTable dataTable = ToDataTable(Todo);
         }
+
+
+       // public static DataTable 
 
         public string Value { get; set; }
     }
