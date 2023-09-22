@@ -7,10 +7,14 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Text.Json.Nodes;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using test_app_1.Models;
 using TODO;
+using Newtonsoft.Json.Bson;
+using Newtonsoft.Json;
 
 namespace test_app_1
 {
@@ -28,13 +32,64 @@ namespace test_app_1
             InitializeComponent();
 
         }
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            AllTodos.RemoveAt(rowId);
+
+            saveDataTextBox.Text = "";
+            richTextBox1.Text = "";
+            radioButton1.Checked = true;
 
 
+            rowId = 0;
+            button1.Enabled = false;
+
+            LoadData();
+
+        }
         private void button1_Click(object sender, EventArgs e)
         {
+
+            // Mandar formato Txt
+            if (radioButton1.Checked == true)
+            {
+
+                StreamWriter text = new StreamWriter(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
+                text.WriteLine("Titulo:" + " " + saveDataTextBox.Text);
+                text.WriteLine(richTextBox1.Text);
+                text.WriteLine("Estatus:" + " " + "Por Hacer");
+
+                text.Close();
+
+            }
+            else if (radioButton2.Checked == true)
+            {
+                StreamWriter text = new StreamWriter(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
+                text.WriteLine("Titulo:" + " " + saveDataTextBox.Text);
+                text.WriteLine(richTextBox1.Text);
+                text.WriteLine("Estatus:" + " " + "Completado");
+
+                text.Close();
+            }
+            // Fin
+
+            //validacion
+            if ((string.IsNullOrEmpty(saveDataTextBox.Text)))
+            {
+                MessageBox.Show("Pon Titulo");
+                return;
+            }
+            if ((string.IsNullOrEmpty(richTextBox1.Text)))
+            {
+                MessageBox.Show("Llena la Descripcion");
+                return;
+            }
+            //fin
+
             if (IsEditing)
             {
                 Todo todo = AllTodos[rowId];
+
 
                 todo.Titulo = saveDataTextBox.Text;
                 todo.Descripcion = richTextBox1.Text;
@@ -42,6 +97,7 @@ namespace test_app_1
 
                 AllTodos[rowId] = todo;
 
+               
                 saveDataTextBox.Text = "";
                 richTextBox1.Text = "";
                 radioButton1.Checked = true;
@@ -59,6 +115,10 @@ namespace test_app_1
                     Estatus = radioButton1.Checked ? "Por Hacer" : "Completado",
 
                 };
+                var JsonString = JsonConvert.SerializeObject(todo);
+                Console.WriteLine(JsonString);
+
+
 
                 AllTodos.Add(todo);
 
@@ -71,13 +131,6 @@ namespace test_app_1
 
             LoadData();
 
-
-            /*StreamWriter text = new StreamWriter(Application.StartupPath + "\\text\\" + saveDataTextBox.Text + " " + ".txt");
-            text.WriteLine("Titulo:" + " " + saveDataTextBox.Text);
-            text.WriteLine(richTextBox1.Text);
-            text.WriteLine("Estatus:" + " " + "Por Hacer");
-
-            text.Close();*/
         }
 
 
@@ -103,16 +156,25 @@ namespace test_app_1
 
         }
 
+        /// <summary>
+        /// Seleccionar una celda 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            Todo todo = AllTodos[e.RowIndex];
+            Todo tarea = AllTodos[e.RowIndex];
 
-            saveDataTextBox.Text = todo.Titulo;
-            richTextBox1.Text = todo.Descripcion;
+            saveDataTextBox.Text = tarea.Titulo;
+            richTextBox1.Text = tarea.Descripcion;
 
             rowId = e.RowIndex;
             IsEditing = true;
+
+            button1.Enabled = true;
+
         }
+
     }
 
 }

@@ -37,6 +37,7 @@
             groupBox1 = new GroupBox();
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox1.SuspendLayout();
             SuspendLayout();
@@ -47,7 +48,7 @@
             dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.BackgroundColor = Color.White;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(12, 289);
+            dataGridView1.Location = new Point(12, 278);
             dataGridView1.MultiSelect = false;
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
@@ -110,7 +111,7 @@
             groupBox1.Controls.Add(radioButton1);
             groupBox1.Location = new Point(21, 212);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(261, 56);
+            groupBox1.Size = new Size(215, 56);
             groupBox1.TabIndex = 10;
             groupBox1.TabStop = false;
             groupBox1.Text = "Estatus";
@@ -137,11 +138,23 @@
             radioButton1.Text = "Por Hacer";
             radioButton1.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            button1.Enabled = false;
+            button1.Location = new Point(242, 245);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 11;
+            button1.Text = "Borrar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_1;
+            // 
             // Nota
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(414, 503);
+            ClientSize = new Size(414, 491);
+            Controls.Add(button1);
             Controls.Add(groupBox1);
             Controls.Add(label2);
             Controls.Add(saveDataTextBox);
@@ -170,5 +183,6 @@
         private GroupBox groupBox1;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
+        private Button button1;
     }
 }
