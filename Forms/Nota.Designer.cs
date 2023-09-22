@@ -93,7 +93,6 @@
             saveDataTextBox.Name = "saveDataTextBox";
             saveDataTextBox.Size = new Size(381, 23);
             saveDataTextBox.TabIndex = 8;
-            saveDataTextBox.TextChanged += saveDataTextBox_TextChanged;
             // 
             // label2
             // 

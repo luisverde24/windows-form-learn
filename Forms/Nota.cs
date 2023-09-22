@@ -15,11 +15,15 @@ using test_app_1.Models;
 using TODO;
 using Newtonsoft.Json.Bson;
 using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace test_app_1
 {
     public partial class Nota : Form
     {
+
+
+
 
         private List<Todo> AllTodos = new();
 
@@ -32,6 +36,7 @@ namespace test_app_1
             InitializeComponent();
 
         }
+
         private void button1_Click_1(object sender, EventArgs e)
         {
             AllTodos.RemoveAt(rowId);
@@ -47,9 +52,9 @@ namespace test_app_1
             LoadData();
 
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+        private void convertText()
+        {
             // Mandar formato Txt
             if (radioButton1.Checked == true)
             {
@@ -72,7 +77,34 @@ namespace test_app_1
                 text.Close();
             }
             // Fin
+        }
 
+        private void Json()
+
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            //string JsonString = JsonConvert.SerializeObject(AllTodos);
+            //Console.WriteLine(JsonString);
+            //File.WriteAllText(rutaArchivo, JsonString);
+
+            // var rutaArchivo = @"C:\Users\LuisGVerde\Desktop\AAA.json
+            // 
+            string test = File.ReadAllText(@"C:\\Users\\LuisGVerde\\Desktop\\AAA.json");
+            var dat = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dataJson>>(test);
+
+
+            System.Console.WriteLine(dat);
+
+
+
+
+        }
+
+        private void IsNullEmptyInput()
+        {
             //validacion
             if ((string.IsNullOrEmpty(saveDataTextBox.Text)))
             {
@@ -85,6 +117,15 @@ namespace test_app_1
                 return;
             }
             //fin
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+
+            convertText();
+
+
+            IsNullEmptyInput();
 
             if (IsEditing)
             {
@@ -97,7 +138,7 @@ namespace test_app_1
 
                 AllTodos[rowId] = todo;
 
-               
+
                 saveDataTextBox.Text = "";
                 richTextBox1.Text = "";
                 radioButton1.Checked = true;
@@ -115,10 +156,8 @@ namespace test_app_1
                     Estatus = radioButton1.Checked ? "Por Hacer" : "Completado",
 
                 };
-                var JsonString = JsonConvert.SerializeObject(todo);
-                Console.WriteLine(JsonString);
 
-
+                Json();
 
                 AllTodos.Add(todo);
 
@@ -146,16 +185,6 @@ namespace test_app_1
             dataGridView1.DataSource = dataTable;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void saveDataTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// Seleccionar una celda 
         /// </summary>
@@ -167,13 +196,19 @@ namespace test_app_1
 
             saveDataTextBox.Text = tarea.Titulo;
             richTextBox1.Text = tarea.Descripcion;
-
             rowId = e.RowIndex;
             IsEditing = true;
 
             button1.Enabled = true;
 
         }
+    }
+
+    public class dataJson
+    {
+        public string Titulo { get; set; }
+        public string Descripcion { get; set; }
+        public string Estatus { get; set; }
 
     }
 
