@@ -51,7 +51,7 @@ namespace test_app_1
             button1.Enabled = false;
 
             LoadData();
-
+            Json();
         }
 
         private void convertText()
