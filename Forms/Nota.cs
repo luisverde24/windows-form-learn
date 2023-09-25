@@ -34,6 +34,7 @@ namespace test_app_1
         public Nota()
         {
             InitializeComponent();
+         
 
         }
 
@@ -46,7 +47,7 @@ namespace test_app_1
             radioButton1.Checked = true;
 
 
-            rowId = 0;
+            rowId = 1;
             button1.Enabled = false;
 
             LoadData();
@@ -86,13 +87,13 @@ namespace test_app_1
             {
                 PropertyNameCaseInsensitive = true,
             };
-            //string JsonString = JsonConvert.SerializeObject(AllTodos);
-            //Console.WriteLine(JsonString);
-            //File.WriteAllText(rutaArchivo, JsonString);
+            string JsonString = JsonConvert.SerializeObject(AllTodos);
+            var rutaArchivo = (@"C:\Users\usuario\OneDrive\Favoritos\AAAD.json");
+            File.WriteAllText(rutaArchivo, JsonString);
 
-            // var rutaArchivo = @"C:\Users\LuisGVerde\Desktop\AAA.json
             // 
-            string test = File.ReadAllText(@"C:\\Users\\LuisGVerde\\Desktop\\AAA.json");
+//            string test = File.ReadAllText(@"C:\\Users\\LuisGVerde\\Desktop\\AAA.json");
+            string test = File.ReadAllText(@"C:\Users\usuario\OneDrive\Favoritos\AAAD.json");
             var dat = Newtonsoft.Json.JsonConvert.DeserializeObject<List<dataJson>>(test);
 
 
@@ -116,6 +117,7 @@ namespace test_app_1
                 MessageBox.Show("Llena la Descripcion");
                 return;
             }
+             
             //fin
         }
 
@@ -157,8 +159,6 @@ namespace test_app_1
 
                 };
 
-                Json();
-
                 AllTodos.Add(todo);
 
                 saveDataTextBox.Text = "";
@@ -167,6 +167,7 @@ namespace test_app_1
 
             }
 
+            Json();
 
             LoadData();
 
@@ -208,7 +209,7 @@ namespace test_app_1
     {
         public string Titulo { get; set; }
         public string Descripcion { get; set; }
-        public string Estatus { get; set; }
+       
 
     }
 
